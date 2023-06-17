@@ -1,0 +1,219 @@
+<style>
+    body,
+    html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden
+    }
+
+    .bg {
+        /* The image used */
+        background-image: url("https://img.freepik.com/free-photo/flat-lay-traveling-essentials-collection_23-2149185232.jpg?w=900&t=st=1683460476~exp=1683461076~hmac=5b02171a62bb7dd7d9e8ee3839484ae4a5d9fba7827c4d893cd9df7b01f90c34");
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+
+    }
+
+    .bgshade {
+        background-color: rgba(0, 0, 0, 0.466);
+        height: 100%;
+
+    }
+
+
+
+    .whiteb {
+        background-color: white;
+        border-radius: 25px;
+        width: 50%;
+    }
+
+    .logo {
+        height: 100px;
+        border-radius: 100px;
+        margin-top: -50px;
+    }
+
+
+    @font-face {
+        font-family: Abril;
+        src: url(/public/fonts/AbrilFatface-Regular.ttf);
+    }
+
+    .crtacc {
+        font-family: Abril;
+        font-weight: bolder;
+        color: #014AAD;
+        font-size: xx-large;
+    }
+
+    .quotes {
+        font-family: Abril;
+        font-weight: bolder;
+        color: #ffffff;
+        font-size: xx-large;
+    }
+
+    .form-control-inp {
+        font-family: monospace;
+        font-size: small;
+        height: 40px;
+    }
+
+    .form-control-btn,
+    .carousel-control-next {
+        font-family: Abril;
+        font-size: large;
+        font-weight: bolder;
+        background-color: #014AAD;
+        border: 0;
+        color: #5CE0E5;
+        height: 40px;
+        opacity: 1;
+
+    }
+
+
+
+    .up {
+        color: #37B5FE;
+    }
+
+    .frm-txt {
+        color: #014AAD;
+        text-decoration: none;
+        font-size: small;
+        margin-top: 60px;
+    }
+
+    .frm-txt.name {
+        color: #014AAD;
+        text-decoration: none;
+        font-size: small;
+        margin-top: 125px;
+    }
+
+    .frm-txt.si {
+        color: #014AAD;
+        text-decoration: none;
+        font-size: small;
+        margin-top: 70px;
+    }
+
+    .form-control {
+        border-color: #014AAD;
+    }
+
+
+
+    .carousel-control-next {
+        position: absolute;
+        bottom: 0px;
+        right: 2px;
+        top: 152px;
+        height: 40px;
+        width: 98%;
+        opacity: 1;
+
+    }
+
+    .carousel-control-next:hover,
+    .carousel-control-next::backdrop {
+        color: #37B5FE;
+        background-color: #014AAD;
+        opacity: 1;
+    }
+
+
+    .form-control-btn:hover {
+        color: #37B5FE;
+        background-color: #014AAD;
+
+    }
+
+    .form-control-btn:hover .up {
+        color: #5CE0E5;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    button[type="submit"]:focus,
+    input[type="file"]:focus {
+        border-color: #014AAD;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 5px #014AAD;
+        outline: 0 none;
+    }
+
+    .quotessm {
+        font-family: trocchi;
+        color: white;
+    }
+</style>
+<section class=" bg ">
+    <div class="bgshade">
+
+
+        <div class="container d-flex justify-content-center">
+            <div class="row" style="width: 50%;height:400px;margin-top:125px;">
+                <div class="col-md-3 " style="background-color: white;width:50%;height:100%;border-radius: 25px">
+                    <div class="d-flex justify-content-center">
+                        <img src="https://serving.photos.photobox.com/248596214cd8a24897c60f6774c3c13f3ddba79b77ee9392631aa6f10b7871bf96a47b9d.jpg"
+                            class="logo" alt="">
+
+                    </div>
+                    <h3 class="crtacc" align="center">Login to Account</h3>
+                    <form action="/login" method="post">
+                    {{#if Err}}
+                    <p style="color: red;font-size:small;">Email or Password is incorrect!</p>
+                    {{/if}}
+                        <div class="mb-3">
+                            <label style="color: black;font-weight:500;" class="form-text" for="email">Email(Personal or
+                                Work)</label>
+                            <input type="text" class="form-control form-control-inp" name="email" id=""
+                                placeholder="(tropicks@example.com)">
+                        </div>
+                        <label style="color: black;font-weight:500;" class="form-text" for="email">Enter a
+                            Strong
+                            Password</label>
+                        <input type="password" class="form-control form-control-inp" onkeyup="checkpass()"
+                            name="password" id="pass" placeholder="">
+                        <button type="submit" class="btn btn-primary form-control form-control-btn mt-3">Log<span
+                                class="up">in</span></button>
+                    </form>
+                    <a style="text-decoration: none;" class="" href="/signup">
+                        <p align="center" class=" frm-txt" for="">Create an Account? Signup.</p>
+                    </a>
+
+
+
+
+                </div>
+                <div class="col-md-6 " style="padding-top: 18%;">
+
+                    <h1 class="quotes">Feel Visions of
+                        <br> Different Cameras
+                    </h1>
+
+                    <p class="quotessm">1000+ Photos <br>
+                        200+ Photographers <br>
+                        500+ Active Users</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script>
+
+
+
+
+
+</script>

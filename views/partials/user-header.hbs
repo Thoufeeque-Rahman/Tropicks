@@ -1,0 +1,133 @@
+<style>
+    @font-face {
+        font-family: Trocchi;
+        src: url(/public/fonts/Trocchi-Regular.ttf);
+    }
+
+    .nav-txt {
+        font-family: Poppins, serif;
+        color: rgba(255, 255, 255, 0.836);
+        font-size: larger;
+        margin-right: 30px;
+    }
+
+    .current {
+
+        color: white;
+
+    }
+
+    .material-symbols-rounded {
+        font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 1,
+            'opsz' 48;
+
+        color: white;
+
+    }
+
+    #acc {
+        font-size: 50px
+    }
+
+    .nav-link:hover {
+        color: #5CE1E6;
+    }
+
+    .customBtn:focus,
+    .customBtn,
+    .customBtn:hover {
+        border: 0;
+        color: rgba(255, 255, 255, 0);
+    }
+
+    .btn{
+        margin-top: 5px;
+    }
+    .btn.login{
+        background-color: #5CE1E6;
+        color: #004AAD;
+        font-weight: bold;
+        font-size: large;
+        margin-right: 15px;
+    }
+
+    .btn.login:hover,
+    .btn.signup:hover{
+        opacity: .9;
+    }
+
+    .btn.signup{
+        background-color: #38B6FF;
+        color: #004AAD;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    .btn-acc,
+    .btn-acc:focus,
+    .btn-acc:hover{
+        background-color: #5CE1E6;
+        color: #004AAD;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    .btn-acc:hover{
+        opacity: .9;
+    }
+
+</style>
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<nav class="navbar navbar-expand-lg ps-5 " style="background-color: #004AAD;">
+    <div class="container-fluid">
+        <a href="https://ibb.co/KxWSdLG"><img style="height: 70px;" src="https://i.ibb.co/m54gkXB/Untitled-2.png"
+                alt="Untitled-2" border="0"></a>
+        {{!-- <img src="https://ibb.co/KxWSdLG" style="height: 70px;" href="/" class="img-fluid" alt=""> --}}
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse float-end" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 pe-5">
+                <li class="nav-item">
+                    <a class="nav-link current nav-txt" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-txt" href="#">Artists</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link nav-txt">Search</a>
+                </li>
+                <li>
+                    {{#if user}}
+                    
+                    <div class="dropdown">
+                        <button class="btn btn-acc dropdown-toggle customBtn" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" >
+                            
+                            {{user.username}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>
+                    {{else}}
+                    <a href="/login"><button class="btn login" >Login</button></a>
+                    <a href="/signup"><button class="btn signup" >Signup</button></a>
+                    
+                    {{/if}}
+                    
+
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
