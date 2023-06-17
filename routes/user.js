@@ -17,16 +17,16 @@ router.post('/upload',(req,res)=>{
   // console.log(req.body);
   // console.log(req.files.Image);
   userHelpers.addImage(user, req.body,(id)=>{
-    // let image=req.files.Image
+    let image=req.files.Image
     console.log(id);
-    res.redirect('/')
-    // image.mv('./public/user-images/'+id+'.jpg',(err)=>{
-    //   if(!err){
-    //     res.render("user/index")
-    //   }else{
-    //     res.removeHeader("user/index")
-    //   }
-    // })
+    
+    image.mv('./public/'+user+'/'+id+'.jpg',(err)=>{
+      if(!err){
+        res.redirect('/')
+      }else{
+        res.send('Err'+err)
+      }
+    })
 
   })
 

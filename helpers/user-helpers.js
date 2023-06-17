@@ -88,7 +88,7 @@ module.exports = {
                         images: imageDatas
                     }
                 }).then((data) => {
-                    db.get().collection(IMAGE_COLLECTION).findOne({'images.imageId': imageId}).toArray().then((data) => {
+                    db.get().collection(IMAGE_COLLECTION).findOne({'images.imageId': imageId}).then((data) => {
                         console.log(data)
                     })
                     // console.log(data.images)
