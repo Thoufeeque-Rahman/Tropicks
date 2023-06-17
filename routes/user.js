@@ -19,6 +19,7 @@ router.post('/upload',(req,res)=>{
   userHelpers.addImage(user, req.body,(id)=>{
     // let image=req.files.Image
     console.log(id);
+    console.log('hi');
     res.redirect('/')
     // image.mv('./public/user-images/'+id+'.jpg',(err)=>{
     //   if(!err){
