@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userHelpers = require('../helpers/user-helpers')
+var fs = require('fs')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,21 +13,50 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/upload',(req,res)=>{
-  let user = req.session.userId
+  let userId = req.session.userId
+  let user = req.session.user
   console.log(user)
   // console.log(req.body);
   // console.log(req.files.Image);
-  userHelpers.addImage(user, req.body,(id)=>{
+  userHelpers.addImage(userId, req.body,(id)=>{
     let image=req.files.Image
     console.log(id);
     
-    image.mv('./public/'+user+'/'+id+'.jpg',(err)=>{
-      if(!err){
-        res.redirect('/')
-      }else{
-        res.send('Err'+err)
+    const path = './public/'+userId+'/'
+    fs.access(path, (err) => {
+      if (err) {
+        
+        fs.mkdir(path, (error) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("New Directory created successfully !!");
+            image.mv(path+id+'.jpg', (err,done)=>{
+              if(err){
+                console.log(err);
+              }else{
+                console.log('done');
+                res.redirect('/')
+              }
+            })
+          }
+        });
+        
+
+      } else {
+        console.log("Directory exists !!");
+        image.mv(path+id+'.jpg', (err,done)=>{
+          if(err){
+            console.log(err);
+          }else{
+            console.log('done');
+            res.redirect('/')
+          }
+        })
       }
     })
+
+    
 
   })
 
@@ -83,5 +113,6 @@ router.get('/profile/:username', (req,res)=>{
   let user = req.session.user
   res.render('user/profile', { admin:false, user })
 })
+
 
 module.exports = router;

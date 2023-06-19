@@ -66,7 +66,7 @@ module.exports = {
                     tags
                 }
 
-                console.log(imageDatas)
+                // console.log(imageDatas)
                 db.get().collection(IMAGE_COLLECTION).insertOne({_id:_id,images:[imageDatas]}).then((data)=>{
                     // console.log(data.images)
                     callback(imageId)
