@@ -170,37 +170,48 @@
         margin: 10px;
         border-radius: 5px;
         box-shadow: 2px 2px 10px 2px rgb(216, 214, 214);
-        height: 300px;
-        ;
+        
+        height: fit-content;
+        
+    }
+
+    .card-img{
+        width: 350px;
+        object-fit: contain;
+        border-radius: 5px;
     }
 
     .card-img-overlay {
         background-color: rgba(0, 0, 0, 0);
-
-
         transition: 0.3s;
 
     }
 
     .card:hover .card-img-overlay {
-        background-color: rgba(0, 0, 0, 0.363);
+        background-color: rgba(0, 0, 0, 0.144);
 
 
     }
 
     .username-btn,
     .username-btn:hover {
-        font-size: 13px;
+        background-color: #ffffff;
+        font-size: 15px;
         font-weight: bold;
-        background-color: #014AAD;
-        color: #5CE0E5;
-
+        color: #014AAD;
+        font-size: 15px;
+        width: fit-content;
+        padding: 3px 7px;
+        align: center;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
     .card-text,
     .card-title,
     .username-btn {
         display: none;
+        
     }
 
     .card:hover .card-text,
@@ -209,29 +220,67 @@
         display: block;
         opacity: 1;
     }
+
+    .meta {
+        padding-left: 15px;
+        padding-bottom: 15px;
+    }
+
+    .tags-show,
+    .tags-show:hover {
+        background-color: rgba(0, 0, 0, 0.623);
+        color: white;
+        font-size: 15px;
+        width: fit-content;
+        padding: 3px 7px;
+        align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        
+    }
+
+    .caption-show{
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .imgBox{
+        float: left;
+    }
 </style>
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
-<section>
+<section >
     <div class="container">
-        <div class="row">
+        <div class="" style="margin-top: 20px;">
 
             {{#each images}}
-            
-            <div class="col-md-4">
+
+            <div class="col-md imgBox" onmouseover="showTag()">
                 <div class="imageCol">
-                    <div class="card text-bg-dark" style="border: none;">
+                    <div class="card text-bg-dark position-relative" style="border: none;">
                         <img src="/{{this.userId}}/{{this._id}}.jpg" class="card-img" alt="...">
                         <div class="card-img-overlay">
-                            <button type="button" onclick="profiles('{{this.username}}')"
-                                class="btn username-btn">@{{this.username}}</button>
-                            <p class="card-text">{{this.caption}}</p>
-                            <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                            
+                            <div id="meta" class="meta position-absolute bottom-0 start-0">
+                                <div class="card-text username-btn"
+                                    onclick="profiles('{{this.username}}')">@{{this.username}}
+                                </div>
+                                <p class="card-text caption-show">{{this.caption}}</p>
+                                <p id="tagsHidden" hidden>{{this.tags}}</p>
+                                <div id="tagsShow" class="d-flex">
+
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
 
                 </div>
             </div>
-            
+
             {{/each}}
         </div>
 
@@ -497,4 +546,23 @@
         showTags()
 
     });
+    
+    
+    
+
+    function showTag() {
+        let tags = document.getElementById('tagsHidden').textContent;
+        tags = tags.split(',');
+        var outputDiv = document.getElementById('tagsShow');
+        
+        for (var i = 0; i < tags.length; i++) {
+          var element = document.createElement("div");
+          element.className = "card-text tags-show flex";
+          element.textContent = tags[i];
+          outputDiv.appendChild(element);
+        }
+        console.log(tags) 
+    }
+    
+
 </script>
