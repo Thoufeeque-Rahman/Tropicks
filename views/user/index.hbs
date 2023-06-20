@@ -257,7 +257,7 @@
 
             {{#each images}}
 
-            <div class="col-md imgBox" onmouseover="showTag()">
+            <div class="col-md imgBox" >
                 <div class="imageCol">
                     <div class="card text-bg-dark position-relative" style="border: none;">
                         <img src="/{{this.userId}}/{{this._id}}.jpg" class="card-img" alt="...">
@@ -268,8 +268,8 @@
                                     onclick="profiles('{{this.username}}')">@{{this.username}}
                                 </div>
                                 <p class="card-text caption-show">{{this.caption}}</p>
-                                <p id="tagsHidden" hidden>{{this.tags}}</p>
-                                <div id="tagsShow" class="d-flex">
+                                <p class="tagsHidden" hidden>{{this.tags}}</p>
+                                <div class="tagsShow" class="d-flex">
 
                                 </div>
                             </div>
@@ -550,10 +550,11 @@
     
     
 
-    function showTag() {
-        let tags = document.getElementById('tagsHidden').textContent;
+    window.onload = function tagShow() {
+        let tags = document.querySelector('.tagsHidden').textContent;
+        console.log(tags)
         tags = tags.split(',');
-        var outputDiv = document.getElementById('tagsShow');
+        var outputDiv = document.querySelectorAll('.tagsShow');
         
         for (var i = 0; i < tags.length; i++) {
           var element = document.createElement("div");
