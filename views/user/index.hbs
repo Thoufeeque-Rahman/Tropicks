@@ -1,6 +1,4 @@
 <style>
-
-
     .modal-header {
         height: 50px;
     }
@@ -109,7 +107,7 @@
     /*    list-style-type: none;*/
     /*}*/
 
-    .content ul{
+    .content ul {
         display: flex;
         flex-wrap: wrap;
         padding: 7px;
@@ -118,7 +116,7 @@
         margin: 12px 0px;
     }
 
-    .content ul li{
+    .content ul li {
         list-style: none;
         background-color: #f2f2f2;
         padding: 5px 8px 5px 10px;
@@ -127,7 +125,7 @@
         border: 1px solid #e3d1e1;
     }
 
-    .content ul li i{
+    .content ul li i {
         height: 25px;
         width: 25px;
         color: #808080;
@@ -139,7 +137,7 @@
         justify-content: center;
     }
 
-    .content ul input{
+    .content ul input {
         outline: none;
         flex: 1;
         padding: 5px;
@@ -147,16 +145,17 @@
         border: none;
         width: 100%;
     }
-    .wrapper :where( li, li i, .details){
+
+    .wrapper :where(li, li i, .details) {
         display: flex;
         align-items: center;
     }
 
-    .wrapper .details{
+    .wrapper .details {
         justify-content: space-between;
     }
 
-    .details button{
+    .details button {
         border: none;
         outline: none;
         background-color: #004AAD;
@@ -166,10 +165,75 @@
         cursor: pointer;
         font-size: 14px;
     }
+
+    .imageCol {
+        margin: 10px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px 2px rgb(216, 214, 214);
+        height: 300px;
+        ;
+    }
+
+    .card-img-overlay {
+        background-color: rgba(0, 0, 0, 0);
+
+
+        transition: 0.3s;
+
+    }
+
+    .card:hover .card-img-overlay {
+        background-color: rgba(0, 0, 0, 0.363);
+
+
+    }
+
+    .username-btn,
+    .username-btn:hover {
+        font-size: 13px;
+        font-weight: bold;
+        background-color: #014AAD;
+        color: #5CE0E5;
+
+    }
+
+    .card-text,
+    .card-title,
+    .username-btn {
+        display: none;
+    }
+
+    .card:hover .card-text,
+    .card:hover .card-title,
+    .card:hover .username-btn {
+        display: block;
+        opacity: 1;
+    }
 </style>
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
 <section>
     <div class="container">
+        <div class="row">
+
+            {{#each images}}
+            
+            <div class="col-md-4">
+                <div class="imageCol">
+                    <div class="card text-bg-dark" style="border: none;">
+                        <img src="/{{this.userId}}/{{this._id}}.jpg" class="card-img" alt="...">
+                        <div class="card-img-overlay">
+                            <button type="button" onclick="profiles('{{this.username}}')"
+                                class="btn username-btn">@{{this.username}}</button>
+                            <p class="card-text">{{this.caption}}</p>
+                            <p class="card-text"><small>Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            {{/each}}
+        </div>
 
     </div>
 </section>
@@ -225,7 +289,7 @@
                                     <h6>Drag & Drop File Here</h6>
                                     <span>OR</span>
                                     <button type="button">Browse File</button>
-<!--                                    <input type="file" name="Image"  class="form-control" >-->
+                                    <!--                                    <input type="file" name="Image"  class="form-control" >-->
 
 
                                 </div>
@@ -366,41 +430,41 @@
     hiddenInput = document.querySelector(".hiddenInput");
 
 
-        let maxTags=10,
-                tags = [];
+    let maxTags = 10,
+        tags = [];
+
+    countTag();
+    showTags()
+    function showTags() {
+        document.getElementById('hiddenInput').value = tags.join(", ");
+
+    }
+
+    function countTag() {
+        input1.focus()
+        countNum.innerText = maxTags - tags.length;
+    }
+
+    function createTag() {
+        ul.querySelectorAll("li").forEach(li => li.remove());
+        tags.slice().reverse().forEach(tag => {
+            let liTag = `<li>${tag}<i class="uit uit-multiply" onclick="remove(this, '${tag}')"></i></li>`;
+            ul.insertAdjacentHTML("afterbegin", liTag);
+        });
+        countTag();
+        showTags()
+    }
+
+    function remove(element, tag) {
+        let index = tags.indexOf(tag);
+        tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+        element.parentElement.remove()
 
         countTag();
         showTags()
-        function showTags(){
-            document.getElementById('hiddenInput').value = tags.join(", ");
+    }
 
-        }
 
-        function countTag() {
-           input1.focus()
-            countNum.innerText = maxTags - tags.length;
-        }
-
-        function createTag(){
-            ul.querySelectorAll("li").forEach(li => li.remove());
-            tags.slice().reverse().forEach(tag =>{
-                let liTag = `<li>${tag}<i class="uit uit-multiply" onclick="remove(this, '${tag}')"></i></li>`;
-                ul.insertAdjacentHTML("afterbegin", liTag);
-            });
-            countTag();
-            showTags()
-        }
-
-     function remove(element, tag){
-            let index = tags.indexOf(tag);
-            tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
-            element.parentElement.remove()
-
-            countTag();
-         showTags()
-     }
-
-    
 
 
     function addTag(e) {
@@ -424,13 +488,13 @@
         }
     }
 
-        input1.addEventListener("keyup", addTag);
-        const removeBtn = document.querySelector(".details button");
-        removeBtn.addEventListener("click", () => {
-            tags.length = 0;
-            ul.querySelectorAll("li").forEach(li => li.remove());
-            countTag();
-            showTags()
+    input1.addEventListener("keyup", addTag);
+    const removeBtn = document.querySelector(".details button");
+    removeBtn.addEventListener("click", () => {
+        tags.length = 0;
+        ul.querySelectorAll("li").forEach(li => li.remove());
+        countTag();
+        showTags()
 
-        });
+    });
 </script>

@@ -49,57 +49,5 @@ module.exports = {
             }
         })
     },
-    addImage: async (_id, imageData, callback)=>{
-        // console.log(product);
-        if(_id){
-            let user = await db.get().collection(IMAGE_COLLECTION).findOne({_id:_id})
-            console.log(user)
-            if(!user){
-                let imageId = new ObjectId()
-                // imageData.push(imageId)
-                let caption = imageData.caption
-                let tags = imageData.tags
-                // console.log(caption,tags)
-                let imageDatas = {
-                    imageId,
-                    caption,
-                    tags
-                }
-
-                // console.log(imageDatas)
-                db.get().collection(IMAGE_COLLECTION).insertOne({_id:_id,images:[imageDatas]}).then((data)=>{
-                    // console.log(data.images)
-                    callback(imageId)
-                })
-            }else{
-                let imageId = new ObjectId()
-                // imageData.push(imageId)
-                let caption = imageData.caption
-                let tags = imageData.tags
-                // console.log(caption,tags)
-                let imageDatas = {
-                    imageId,
-                    caption,
-                    tags
-                }
-                console.log(imageDatas)
-                await db.get().collection(IMAGE_COLLECTION).updateOne({_id:_id},{
-                    $push:{
-                        images: imageDatas
-                    }
-                }).then((data) => {
-                    db.get().collection(IMAGE_COLLECTION).findOne({'images.imageId': imageId}).then((data) => {
-                        console.log(data)
-                    })
-                    // console.log(data.images)
-                    callback(imageId)
-
-                })
-            }
-        }else{
-            console.log("Login First")
-        }
-
-
-    }
+    
 }

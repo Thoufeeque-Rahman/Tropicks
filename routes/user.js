@@ -1,13 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var userHelpers = require('../helpers/user-helpers')
+var imageHelpers = require('../helpers/image-helpers')
 var fs = require('fs')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   let user = req.session.user
   console.log(user);
-  res.render('user/index', { admin:false, user });
+
+  
+    imageHelpers.getImages().then((images)=>{
+      console.log(images);
+      res.render('user/index', { admin:false, user, images });
+    })
+  
 });
 
 
@@ -15,10 +22,10 @@ router.get('/', function(req, res, next) {
 router.post('/upload',(req,res)=>{
   let userId = req.session.userId
   let user = req.session.user
-  console.log(user)
+  console.log(user.username)
   // console.log(req.body);
   // console.log(req.files.Image);
-  userHelpers.addImage(userId, req.body,(id)=>{
+  imageHelpers.addImage(userId, req.body,user.username,(id)=>{
     let image=req.files.Image
     console.log(id);
     
